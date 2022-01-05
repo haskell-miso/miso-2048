@@ -1,5 +1,5 @@
 { mkDerivation, aeson, aeson-pretty, base, containers, miso, random
-, stdenv
+, lib
 }:
 mkDerivation {
   pname = "hs-2048";
@@ -11,5 +11,5 @@ mkDerivation {
     aeson aeson-pretty base containers miso random
   ];
   description = "An implementation of 2048 using Haskell and Miso";
-  license = stdenv.lib.licenses.bsd3;
+  license = lib.licenses.bsd3;
 }
