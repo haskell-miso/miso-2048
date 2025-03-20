@@ -8,6 +8,9 @@ license:             BSD3
 license-file:        LICENSE
 
 executable app
+  if arch(wasm32)
+    cpp-options:
+      -DWASM
   hs-source-dirs:      src
   main-is:             Main.hs
   build-depends:       aeson,
