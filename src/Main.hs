@@ -15,19 +15,16 @@ import GameModel
 import InputModel
 import Logic
 import Rendering
-import Touch
 
 -- | Entry point for a miso application
 main :: IO ()
 main = do
   stdGen <- getStdGen
   let (seed, _) = random stdGen
-  startApp App {model = defaultGame {randomSeed = seed}, ..}
-  where
-    initialAction = Init -- initial action to be executed on application load
-    model = defaultGame -- initial model
-    update = updateGameState -- update function
-    view = display -- view function
-    events = union touchEvents defaultEvents -- default delegated events
-    mountPoint = Nothing -- defaults to body
-    subs = [arrowsSub GetArrows] -- empty subscription list
+      model = defaultGame { randomSeed = seed }
+  startApp (defaultApp model updateGameState display)
+    { initialAction = Just Init
+    , subs = [arrowsSub GetArrows]
+    , events = pointerEvents <> defaultEvents
+    , logLevel = Off
+    }

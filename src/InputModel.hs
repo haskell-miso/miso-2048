@@ -3,7 +3,6 @@
 module InputModel where
 
 import Miso
-import Touch
 
 data Direction
   = U
@@ -19,8 +18,8 @@ data Action
   | GetArrows Arrows
   | Continue
   | Sync
-  | TouchStart TouchEvent
-  | TouchEnd TouchEvent
+  | TouchStart PointerEvent
+  | TouchEnd PointerEvent
   | NoOp
 
 toDirection :: Arrows -> Direction

@@ -1,8 +1,9 @@
 module GameModel where
 
 import Data.List
+import Miso
+
 import InputModel
-import Touch
 
 data Tile
   = Number Int
@@ -47,7 +48,7 @@ data GameState = GameState
   , gameProgress :: Progress
   , direction :: Direction
   , randomSeed :: Int
-  , prevTouch :: Maybe Touch
+  , prevTouch :: Maybe PointerEvent
   } deriving (Show, Eq)
 
 gridSize :: Int
