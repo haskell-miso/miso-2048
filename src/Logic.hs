@@ -1,8 +1,11 @@
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Logic where
 
+import Control.Monad.State
 import Data.Maybe
 import Miso
 import System.Random
@@ -148,24 +151,27 @@ step state@GameState {..} =
      | direction /= None -> stepSlide state
      | otherwise -> state
 
-updateGameState :: Action -> GameState -> Effect Action GameState
-updateGameState Sync state@GameState {..} =
-  noEff state {drawScoreAdd = scoreAdd}
-updateGameState NewGame state = newGame state <# pure Sync
-updateGameState Continue state = noEff state {gameProgress = Continuing}
-updateGameState (GetArrows arr) state = step nState <# pure Sync
-  where
-    nState = state {direction = toDirection arr}
-updateGameState (TouchStart pointer) state =
-  state {prevTouch = Just pointer} <# do
-    putStrLn "Touch did start"
-    pure NoOp
-updateGameState (TouchEnd pointer) state =
-  state {prevTouch = Nothing} <# do
-    putStrLn "Touch did end"
-    let (GetArrows x) =
-          swipe (coords . fromJust . prevTouch $ state) (coords pointer)
-    print x
-    pure $ swipe (coords . fromJust . prevTouch $ state) (coords pointer)
-updateGameState Init state = state <# pure NewGame
-updateGameState _ state = noEff state
+updateGameState :: Action -> Effect GameState Action ()
+updateGameState = \case
+  Init ->
+    issue NewGame
+  Sync ->
+    modify $ \m -> m { drawScoreAdd = scoreAdd m }
+  NewGame -> do
+    modify newGame
+    issue Sync
+  Continue ->
+    modify $ \m -> m { gameProgress = Continuing }
+  GetArrows arr -> do
+    modify $ \m -> m { direction = toDirection arr }
+    modify step
+    issue Sync
+  TouchStart pointer ->
+    modify $ \m -> m { prevTouch = Just pointer }
+  TouchEnd pointer -> do
+    modify $ \m -> m { prevTouch = Nothing }
+    mapM_ action =<< prevTouch <$> get
+      where
+        action touch
+          = issue
+          $ swipe (client touch) (client pointer)

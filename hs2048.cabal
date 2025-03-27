@@ -18,6 +18,7 @@ executable app
                        base,
                        containers,
                        miso,
+                       mtl,
                        random
   other-modules:       GameModel
                        InputModel

@@ -23,7 +23,7 @@ data Action
   | NoOp
 
 toDirection :: Arrows -> Direction
-toDirection arr@Arrows {..} =
+toDirection Arrows {..} =
   case (arrowX, arrowY) of
     (-1, 0) -> L
     (1, 0) -> R
@@ -31,12 +31,13 @@ toDirection arr@Arrows {..} =
     (0, 1) -> U
     _ -> None
 
+swipeDir :: (Ord b, Num b) => b -> b -> (b, b)
 swipeDir xDiff yDiff
   | abs xDiff >= abs yDiff = (signum xDiff, 0)
   | otherwise = (0, signum yDiff)
 
-swipe :: (Int, Int) -> (Int, Int) -> Action
-swipe (px, py) (x, y) = GetArrows $ Arrows xDir yDir
+swipe :: (Double, Double) -> (Double, Double) -> Action
+swipe (px, py) (x, y) = GetArrows $ Arrows (round xDir) (round yDir)
   where
     xDiff = x - px
     yDiff = py - y
