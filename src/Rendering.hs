@@ -8,6 +8,7 @@ import GameModel
 import InputModel
 import Miso
 import Miso.String (MisoString, ms)
+import qualified Miso.Style as CSS
 import qualified Miso.String as S
 
 black :: MisoString
@@ -209,6 +210,6 @@ display model =
   where
     preview =
       div_
-        [ style_ [("left", "100px"), ("width", "100px"), ("position", "absolute")]
+        [ CSS.style_ [("left", "100px"), ("width", "100px"), ("position", "absolute")]
         ]
         [text . S.pack . show $ model]
