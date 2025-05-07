@@ -4,7 +4,6 @@
 
 module Rendering where
 
-import qualified Data.Map as M
 import GameModel
 import InputModel
 import Miso
@@ -210,7 +209,6 @@ display model =
   where
     preview =
       div_
-        [ style_ . M.fromList $
-          [("left", "100px"), ("width", "100px"), ("position", "absolute")]
+        [ style_ [("left", "100px"), ("width", "100px"), ("position", "absolute")]
         ]
         [text . S.pack . show $ model]
