@@ -27,7 +27,7 @@ main = do
   stdGen <- getStdGen
   let (seed, _) = random stdGen
       model = defaultGame { randomSeed = seed }
-  startApp (defaultApp model updateGameState display)
+  startComponent (defaultComponent model updateGameState display)
     { initialAction = Just Init
     , subs = [arrowsSub GetArrows]
     , events = pointerEvents <> defaultEvents
