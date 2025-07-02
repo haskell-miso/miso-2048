@@ -29,7 +29,7 @@ main = do
   stdGen <- getStdGen
   let (seed, _) = random stdGen
       model = defaultGame { randomSeed = seed }
-  startComponent @"2048" (defaultComponent model updateGameState display)
+  startComponent (component model updateGameState display)
     { initialAction = Just Init
     , subs = [arrowsSub GetArrows]
     , events = pointerEvents <> defaultEvents
