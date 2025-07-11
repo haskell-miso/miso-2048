@@ -11,6 +11,13 @@ executable app
   if arch(wasm32)
     cpp-options:
       -DWASM
+
+  if arch(wasm32)
+    ghc-options:
+      -no-hs-main -optl-mexec-model=reactor "-optl-Wl,--export=hs_start"
+  ghc-options:
+    -funbox-strict-fields -O2 -ferror-spans -fspecialise-aggressively -Wall
+
   hs-source-dirs:      src
   main-is:             Main.hs
   build-depends:       aeson,
