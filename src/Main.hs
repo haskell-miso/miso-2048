@@ -8,7 +8,7 @@
 -- | Haskell module declaration
 module Main where
 
-import Data.Map
+import Data.Map.Strict
 -- | Miso framework import
 import Miso
 import Miso.String (MisoString, ms)
@@ -29,7 +29,7 @@ main = do
   stdGen <- getStdGen
   let (seed, _) = random stdGen
       model = defaultGame { randomSeed = seed }
-  startComponent (component model updateGameState display)
+  run $ startComponent (component model updateGameState display)
     { initialAction = Just Init
     , subs = [arrowsSub GetArrows]
     , events = pointerEvents <> defaultEvents
