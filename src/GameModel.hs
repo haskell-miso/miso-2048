@@ -14,7 +14,7 @@ data Tile
 
 instance Show Tile where
   show (Number n) = show n
-  show (Tile n (x, y) _) = show n
+  show (Tile n _ _) = show n
   show Empty = "-"
 
 instance Eq Tile where

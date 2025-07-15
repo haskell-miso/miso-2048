@@ -1,17 +1,12 @@
 -- | Haskell language pragma
 {-# LANGUAGE CPP #-}
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TypeApplications #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
 
 -- | Haskell module declaration
 module Main where
 
-import Data.Map.Strict
 -- | Miso framework import
 import Miso
-import Miso.String (MisoString, ms)
 import System.Random
 
 import GameModel

@@ -85,7 +85,7 @@ wonMessage :: MisoString
 wonMessage = "You won!"
 
 displayHeading :: GameState -> View Action
-displayHeading model@GameState {..} =
+displayHeading GameState {..} =
   div_
     [class_ "heading"]
     [ h1_ [class_ "title"] [text "2048"]
@@ -207,9 +207,9 @@ display model =
   div_
     [class_ "container"]
     [displayHeading model, displayIntro, displayGame model]
-  where
-    preview =
-      div_
-        [ CSS.style_ [("left", "100px"), ("width", "100px"), ("position", "absolute")]
-        ]
-        [text . S.pack . show $ model]
+  -- where
+  --   preview =
+  --     div_
+  --       [ CSS.style_ [("left", "100px"), ("width", "100px"), ("position", "absolute")]
+  --       ]
+  --       [text . S.pack . show $ model]

@@ -67,7 +67,7 @@ slideGameState state@GameState {..} =
     else state
          { grid = newGrid
          , score = newScore
-         , bestScore = max bestScore newScore
+         , bestScore = newBest
          , scoreAdd = gotScore
          }
   where
