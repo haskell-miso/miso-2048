@@ -151,7 +151,7 @@ step state@GameState {..} =
      | direction /= None -> stepSlide state
      | otherwise -> state
 
-updateGameState :: Action -> Effect GameState Action
+updateGameState :: Action -> Transition GameState Action
 updateGameState = \case
   Init ->
     issue NewGame
