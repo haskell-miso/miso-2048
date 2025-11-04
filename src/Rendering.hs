@@ -6,10 +6,11 @@ module Rendering where
 
 import GameModel
 import InputModel
+
 import Miso
-import Miso.String (MisoString, ms)
-import qualified Miso.Style as CSS
 import qualified Miso.String as S
+import Miso.Html
+import Miso.Html.Property
 
 black :: MisoString
 black = "rgb(0,0,0)"
