@@ -1,5 +1,6 @@
 -- | Haskell language pragma
 {-# LANGUAGE CPP #-}
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE DataKinds #-}
 
 -- | Haskell module declaration
@@ -29,4 +30,7 @@ main = do
     , subs = [arrowsSub GetArrows]
     , events = pointerEvents <> defaultEvents
     , logLevel = Off
+#ifndef WASM
+    , styles = [ Href "./static/main.css" ]
+#endif
     }
