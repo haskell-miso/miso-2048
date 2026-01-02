@@ -1,7 +1,7 @@
 module GameModel where
 
 import Data.List
-import Miso
+import Miso hiding ((!!))
 
 import InputModel
 

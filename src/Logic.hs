@@ -7,7 +7,7 @@ module Logic where
 
 import Control.Monad.State
 import Data.Maybe
-import Miso
+import Miso hiding ((!!), Sync)
 import System.Random
 
 import GameModel
