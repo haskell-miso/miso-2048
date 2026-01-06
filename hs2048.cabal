@@ -25,9 +25,7 @@ executable app
 
   hs-source-dirs:      src
   main-is:             Main.hs
-  build-depends:       aeson,
-                       aeson-pretty,
-                       base,
+  build-depends:       base,
                        containers,
                        miso,
                        mtl,
