@@ -26,10 +26,9 @@ main = do
   stdGen <- getStdGen
   let (seed, _) = random stdGen
       model = defaultGame { randomSeed = seed }
-  run $ startComponent (component model updateGameState display)
+  startComponent (M.singleton "click" BUBBLE) (component model updateGameState display)
     { initialAction = Just Init
     , subs = [arrowsSub GetArrows]
-    , events = M.singleton "click" BUBBLE
 #ifndef WASM
     , styles = [ Href "./static/main.css" ]
 #endif
