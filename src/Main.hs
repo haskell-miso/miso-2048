@@ -27,7 +27,7 @@ main = do
   let (seed, _) = random stdGen
       model = defaultGame { randomSeed = seed }
   startComponent (M.singleton "click" BUBBLE) (component model updateGameState display)
-    { initialAction = Just Init
+    { mount = Just Init
     , subs = [arrowsSub GetArrows]
 #ifndef WASM
     , styles = [ Href "./static/main.css" ]
