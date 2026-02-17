@@ -26,7 +26,7 @@ main = do
   stdGen <- getStdGen
   let (seed, _) = random stdGen
       model = defaultGame { randomSeed = seed }
-  startComponent (M.singleton "click" BUBBLE) (component model updateGameState display)
+  startApp (M.singleton "click" BUBBLE) (component model updateGameState display)
     { mount = Just Init
     , subs = [arrowsSub GetArrows]
 #ifndef WASM
